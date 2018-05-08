@@ -22,6 +22,7 @@ export default class Form1 extends React.Component {
     this.setState({ usstate: e.target.value});
   }*/
 
+
   onSubmit(e){
     e.preventDefault();
     console.log("onSubmit");
@@ -50,12 +51,43 @@ export default class Form1 extends React.Component {
         </option>
       )
     );
+    var days = [
+      {code: "0", name: "月"},
+      {code: "1", name: "火"},
+      {code: "2", name: "水"},
+      {code: "3", name: "木"},
+      {code: "4", name: "金"},
+      {code: "5", name: "土"},
+      {code: "6", name: "日"}
+    ]
+    var alldays = days.map(
+      (n) => (
+        <div className="form-check">
+          <input className="form-check-input" name={n.code} id="radio_everymon" type="checkbox"/>
+          <label className="form-check-label">{n.name}</label>
+        </div>
+      )
+    );
     return (
       <form onSubmit={this.onSubmit}>
         <div className="form-group">
-            <label form="myselector">仕事の名前</label>
+            <label form="work_name_form">仕事の名前は？</label>
             <input type="text" className="form-control input-sm" placeholder="見廻り"
                 value={this.state.task_name}></input>
+        </div>
+        <div className="form-group">
+          <label form="work_period_form">いつやる？</label>
+          <div className="form-check">
+            <input className="form-check-input" name="radio" id="radio_everyday" type="radio"/>
+            <label className="form-check-label">毎日</label>
+          </div>
+          <div className="form-check">
+            <input className="form-check-input" name="radio" id="radio_everyweek" type="radio"/>
+            <label className="form-check-label">毎週
+            <div className="form-check form-check-inline">
+              {alldays}
+            </div></label>
+          </div>
         </div>
         <div>
             <select className="custom-select"
